@@ -37,7 +37,7 @@ class BOOK(objects.Object):
     PUBLISH_DATE: Optional[datetime.datetime]
 ```
 
-### Create Objects
+### Manipulate objects
 ```python
 data = ["a" * x for x in range(10)]
 
@@ -65,6 +65,8 @@ bb = BOOK.from_data(data)
 
 ### Call function
 ```python
+from oracle_object_mapping import utils
+
 connection: cx_Oracle.connection
 name = 'LIBRARY.CREATE_BOOK'
 return_type = BOOK
