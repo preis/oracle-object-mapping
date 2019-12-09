@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 120
+max-complexity = 6
+inline-quotes = single
+ignore =
+    D106  # Missing docstring in public nested class
+    E722
+exclude =
+    .git
+    .idea
+    .mypy_cache
+    venv
