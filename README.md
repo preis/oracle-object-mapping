@@ -41,26 +41,26 @@ class BOOK(objects.Object):
 ```python
 data = ["a" * x for x in range(10)]
 
-ta = TABLE_VARCHARS()
+table_a = TABLE_VARCHARS()
 for x in data:
-    ta.append(x)
+    table_a.append(x)
 
-tb = TABLE_VARCHARS.from_data(data)
+table_b = TABLE_VARCHARS.from_data(data)
 
-# ta == tb
+# table_a == table_b
 ```
 
 ```python
-ba = BOOK()
-ba.TITLE = 'Hello'
-ba.AUTHORS = TABLE_VARCHARS.from_data(['Alberto', 'José'])
+book_a = BOOK()
+book_a.TITLE = 'Hello'
+book_a.AUTHORS = TABLE_VARCHARS.from_data(['Alberto', 'José'])
 
 # ba.to_data() == {'TITLE': 'HELLO', 'AUTHORS': ['Alberto', 'José']}
 
 data = {'TITLE': 'HELLO', 'AUTHORS': ['Alberto', 'José']}
-bb = BOOK.from_data(data)
+book_b = BOOK.from_data(data)
 
-# ba == bb
+# book_a == book_b
 ```
 
 ### Call function
@@ -70,6 +70,6 @@ from oracle_object_mapping import utils
 connection: cx_Oracle.connection
 name = 'LIBRARY.CREATE_BOOK'
 return_type = BOOK
-new_book = utils.call_function(connection, name, BOOK, [ba])
+new_book = utils.call_function(connection, name, return_type, [book_a])
 print(new_book.ID)
 ```
