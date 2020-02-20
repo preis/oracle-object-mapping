@@ -1,4 +1,5 @@
-from typing import Any, Dict, List, Type, TypeVar
+import datetime
+from typing import Any, Dict, List, Type, TypeVar, cast
 
 import cx_Oracle
 
@@ -16,7 +17,7 @@ def oracle_object_to_data(obj: cx_Oracle.Object) -> Any:
     return data
 
 
-T = TypeVar('T', bound=objects.Base)
+T = TypeVar('T', objects.Base, float, int, bytes, str, datetime.datetime, datetime.timedelta)
 
 
 def call_function(connection: cx_Oracle.Connection, name: str, return_type: Type[T], args: List[Any] = None,
@@ -26,8 +27,14 @@ def call_function(connection: cx_Oracle.Connection, name: str, return_type: Type
     if args is None:
         args = []
     with connection.cursor() as cursor:
-        r_type = connection.gettype(return_type.__type_name__) if issubclass(return_type, objects.Base) else return_type
+        if issubclass(return_type, objects.Base):
+            r_type = connection.gettype(return_type.__type_name__)
+        else:
+            r_type = return_type
         args_ = [v.to_oracle_object(connection) if isinstance(v, objects.Base) else v for v in args]
         kwargs_ = {k: (v.to_oracle_object(connection) if isinstance(v, objects.Base) else v) for k, v in kwargs.items()}
         obj = cursor.callfunc(name, r_type, args_, kwargs_)
-        return return_type.from_oracle_object(obj) if issubclass(return_type, objects.Base) else obj
+        if issubclass(return_type, objects.Base):
+            return return_type.from_oracle_object(obj)
+        else:
+            return obj

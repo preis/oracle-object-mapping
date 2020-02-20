@@ -327,6 +327,7 @@ T = typing.TypeVar('T')
 
 
 class Base:
+    __type_name__: str
     package: typing.ClassVar[str]
 
     @classmethod
