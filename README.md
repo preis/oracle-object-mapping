@@ -70,6 +70,6 @@ from oracle_object_mapping import utils
 connection: cx_Oracle.connection
 name = 'LIBRARY.CREATE_BOOK'
 return_type = BOOK
-new_book = utils.call_function(connection, name, return_type, [book_a])
+new_book = utils.call_function(connection, name, return_type, args=[book_a])
 print(new_book.ID)
 ```
