@@ -5,7 +5,7 @@
 
 # Install
 ```
-pip install git+https://github.com/domingues/oracle-object-mapping.git
+pip install oracle-object-mapping
 ```
 
 ## Example

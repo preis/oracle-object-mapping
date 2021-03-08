@@ -26,11 +26,12 @@ setuptools.setup(
     name='oracle-object-mapping',
     version=version,
     author='Fábio Domingues',
-    author_email='fadomingues@uporto.pt',
+    author_email='fabio.a.domingues@gmail.com',
     license='MIT',
     description=description,
     long_description=readme,
     long_description_content_type='text/markdown',
+    url='https://github.com/domingues/oracle-object-mapping',
     packages=setuptools.find_packages(),
     install_requires=install_requires,
     extras_require={
