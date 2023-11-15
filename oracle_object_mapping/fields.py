@@ -5,19 +5,19 @@ Database fields types mapping.
 """
 
 """
-BFILE: cx_Oracle.LOB
+BFILE: oracledb.LOB
 BINARY_DOUBLE: float
 BINARY_FLOAT: float
 BLOB: bytes
 CHAR: str
 CLOB: str
-CURSOR: cx_Oracle.Cursor
+CURSOR: oracledb.Cursor
 DATE: datetime.datetime
 INTERVAL_DAY_TO_SECOND: datetime.timedelta
 LONG: str
 LONG_RAW: bytes
 NCHAR: str
-NCLOB: cx_Oracle.LOB
+NCLOB: oracledb.LOB
 NUMBER: typing.Union[float, int]
 NVARCHAR2: str
 OBJECT: TypeVar('T1', bound=TypeVar('T0', bound=Base))

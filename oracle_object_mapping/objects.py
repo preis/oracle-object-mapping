@@ -4,7 +4,7 @@ import abc
 import sys
 import typing
 
-import cx_Oracle
+import oracledb
 
 
 class DbType:
@@ -341,11 +341,11 @@ class Base:
 
     @classmethod
     @abc.abstractmethod
-    def from_oracle_object(cls: typing.Type[T], obj: cx_Oracle.Object) -> T:
+    def from_oracle_object(cls: typing.Type[T], obj: oracledb.Object) -> T:
         ...
 
     @abc.abstractmethod
-    def to_oracle_object(self, connection: cx_Oracle.Connection) -> cx_Oracle.Object:
+    def to_oracle_object(self, connection: oracledb.Connection) -> oracledb.Object:
         ...
 
 
@@ -358,10 +358,10 @@ class Object(Base, metaclass=ObjectMeta):
         ...
 
     @classmethod
-    def from_oracle_object(cls: typing.Type[T], obj: cx_Oracle.Object) -> T:
+    def from_oracle_object(cls: typing.Type[T], obj: oracledb.Object) -> T:
         ...
 
-    def to_oracle_object(self, connection: cx_Oracle.Connection) -> cx_Oracle.Object:
+    def to_oracle_object(self, connection: oracledb.Connection) -> oracledb.Object:
         ...
 
 
@@ -376,8 +376,8 @@ class Collection(typing.List[T], Base, metaclass=CollectionMeta):
         ...
 
     @classmethod
-    def from_oracle_object(cls: typing.Type[Collection[T]], obj: cx_Oracle.Object) -> Collection[T]:
+    def from_oracle_object(cls: typing.Type[Collection[T]], obj: oracledb.Object) -> Collection[T]:
         ...
 
-    def to_oracle_object(self, connection: cx_Oracle.Connection) -> cx_Oracle.Object:
+    def to_oracle_object(self, connection: oracledb.Connection) -> oracledb.Object:
         ...

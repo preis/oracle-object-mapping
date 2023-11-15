@@ -1,13 +1,13 @@
 import datetime
 from typing import Any, Dict, List, Type, TypeVar, cast
 
-import cx_Oracle
+import oracledb
 
 from . import objects
 
 
-def oracle_object_to_data(obj: cx_Oracle.Object) -> Any:
-    if not isinstance(obj, cx_Oracle.Object):
+def oracle_object_to_data(obj: oracledb.Object) -> Any:
+    if not isinstance(obj, oracledb.Object):
         return obj
     if obj.type.iscollection:
         return [oracle_object_to_data(o) for o in obj.aslist()]
@@ -20,7 +20,7 @@ def oracle_object_to_data(obj: cx_Oracle.Object) -> Any:
 T = TypeVar('T', objects.Base, float, int, bytes, str, datetime.datetime, datetime.timedelta)
 
 
-def call_function(connection: cx_Oracle.Connection, name: str, return_type: Type[T], *, args: List[Any] = None,
+def call_function(connection: oracledb.Connection, name: str, return_type: Type[T], *, args: List[Any] = None,
                   kwargs: Dict[str, Any] = None) -> T:
     if kwargs is None:
         kwargs = {}
